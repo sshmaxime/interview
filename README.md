@@ -10,7 +10,7 @@
 
 3) What are some Merkle tree use cases?
 
--> In systems where data integrity needs to be done: Distributed systems most of all but not only, ie: database replication.
+-> In systems where data integrity needs to be done: Distributed and P2P systems but there must be other applications that I'm not aware of.
 
 ## Question - Modelisation Task
 
@@ -76,8 +76,8 @@ In a realtime DB (NoSQL) like RethinkDb:
 
 2. What is your strategy to update rankings in real time?
 
-Our backend is connected to our frontend via Websocket. We have a function listening to changes in our db making it "realtime". When "things" happens and the db get updated (let say Zidane is playing and got a score of 100 during the weekend) then our backend will properly send this info to all our users through websocket. Update will be "live" on the frontend.
+Our backend is connected to our frontend via Websocket. We have a function listening to changes in our db making it "realtime". When "things" happens and the db get updated (let say Zidane is playing and got a score of 100 during the weekend) then our backend will properly receive this info (cause it is listening for changes on the db - could be on specific db fields) and send it to all our users through websocket. Update will be "live" on the frontend.
 
 3. What are the trade-offs?
 
-Possibility of big json objects, might not be super efficient to sort. In the case of RethinkDB there is a function to do that and it is stated to be fast. Possibility of sending update to users that don't need it. Needs of good replication in our databases (rethinkdb handles it but in the case where we would build our own system we could use a merkle tree). Not thinking of anything else at the moment.
+Possibility of big json objects, might not be super efficient to sort. In the case of RethinkDB there is a function to do that and it is stated to be fast. Possibility of sending update to users that don't need it. Needs of good replication in our databases (rethinkdb handles it but in the case where we would build our own system we could use a merkle tree to handle replication over our cluster). Not thinking of anything else at the moment.
