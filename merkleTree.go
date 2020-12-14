@@ -35,19 +35,9 @@ func (m *MerkleTree) DisplayLevel(level int) {
 	}
 }
 
-func getLevel(node *merkleTreeNode, array [][]byte, level int, indexLevel int) [][]byte {
-	if indexLevel == level {
-		return append(array, node.hash)
-	}
-	if node.left != nil {
-		array = getLevel(node.left, array, level, indexLevel+1)
-	}
-	if node.right != nil {
-		array = getLevel(node.right, array, level, indexLevel+1)
-	}
-	return array
-}
-
 func (m *MerkleTree) Level(level int) [][]byte {
-	return getLevel(m.root, [][]byte{}, level, 1)
+	if level < 1 || level > m.height {
+		return [][]byte{}
+	}
+	return getHashAtLevel(m.root, [][]byte{}, level, 1)
 }

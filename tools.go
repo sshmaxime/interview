@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/sha256"
-	"fmt"
 )
 
 func createHash(value []byte) []byte {
@@ -23,13 +22,6 @@ func CreateHashTreeArrayFromArray(inputs []string) []merkleTreeNode {
 		nodes = append(nodes, node)
 	}
 	return nodes
-}
-
-func PrintHashTreeArray(hashTreeArray []merkleTreeNode) {
-	for _, hashTree := range hashTreeArray {
-		fmt.Printf("%x\n", hashTree.hash)
-		fmt.Printf("%s\n", hashTree.value)
-	}
 }
 
 func CreateMerkleTreeFromHashTreeArray(hashTreeArray []merkleTreeNode, index int) (*merkleTreeNode, int) {
@@ -64,4 +56,17 @@ func CreateMerkleTreeFromHashTreeArray(hashTreeArray []merkleTreeNode, index int
 		newHashTreeArray = append(newHashTreeArray, node)
 	}
 	return CreateMerkleTreeFromHashTreeArray(newHashTreeArray, index+1)
+}
+
+func getHashAtLevel(node *merkleTreeNode, array [][]byte, level int, indexLevel int) [][]byte {
+	if indexLevel == level {
+		return append(array, node.hash)
+	}
+	if node.left != nil {
+		array = getHashAtLevel(node.left, array, level, indexLevel+1)
+	}
+	if node.right != nil {
+		array = getHashAtLevel(node.right, array, level, indexLevel+1)
+	}
+	return array
 }
