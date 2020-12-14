@@ -1,12 +1,15 @@
 ## Question - Merkle Tree
 
 1) In the illustration, let’s imagine I know the whole Merkle tree. Someone gives me L2 data block but I don’t trust him. How can I check if L2 data is valid?
+
 -> If I know the whole tree I would need to get the sibling of Hash 0-1(L2), which is Hash 0-0(L1), then concatenate them together in order to produce a hash. Then compare this hash with Hash 0. If same then L2 data received is valid.
 
 2) I know only the L3 block and the Merkle root. What minimum information do I need to check that the L3 block and the Merkle root belong to the same Merkle tree ?
+
 -> I need the sibling of Hash 1-0 (L3), which is Hash 1-1 (L4) and their parent's sibling Hash 0.
 
 3) What are some Merkle tree use cases?
+
 -> In systems where data integrity needs to be done: Distributed systems most of all but not only, ie: database replication.
 
 ## Question - Modelisation Task
@@ -72,7 +75,9 @@ In a realtime DB (NoSQL) like RethinkDb:
 > The field "cards" in the league table allows us to modify teams score efficiently. If a player stats needs to be update and therefore changing the score of its team. Instead of having to go through all teams to see which team has it, we can keep the track of all the cards used and by which player. Allowing us to update the data more efficiently.
 
 2. What is your strategy to update rankings in real time?
+
 Our backend is connected to our frontend via Websocket. We have a function listening to changes in our db making it "realtime". When "things" happens and the db get updated (let say Zidane is playing and got a score of 100 during the weekend) then our backend will properly send this info to all our users through websocket. Update will be "live" on the frontend.
 
 3. What are the trade-offs?
+
 Possibility of big json objects, might not be super efficient to sort. In the case of RethinkDB there is a function to do that and it is stated to be fast. Possibility of sending update to users that don't need it. Needs of good replication in our databases (rethinkdb handles it but in the case where we would build our own system we could use a merkle tree). Not thinking of anything else at the moment.
