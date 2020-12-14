@@ -1,3 +1,18 @@
+## Get Started
+
+#### Requirements
+
+- Go
+- Make
+
+#### Run
+
+```make```
+
+#### Test
+
+```make test```
+
 ## Question - Merkle Tree
 
 1) In the illustration, let’s imagine I know the whole Merkle tree. Someone gives me L2 data block but I don’t trust him. How can I check if L2 data is valid?
