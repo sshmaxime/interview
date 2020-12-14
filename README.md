@@ -2,7 +2,7 @@
 
 #### Requirements
 
-- Go
+- Go >= version 1.11
 - Make
 
 #### Run
