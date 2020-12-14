@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	merkleTree := MerkleTree{}
-	merkleTree.InitFromArray([]string{"1", "2", "3", "4"})
+	merkleTree.InitFromArray([]string{"1", "2", "3", "4", "5"})
 	fmt.Printf("%x\n", merkleTree.root.hash)
 }
 
@@ -12,8 +12,13 @@ func main() {
 //2- d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35
 //3- 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce
 //4- 4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a
+//5- ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d
 
 //12- 4295f72eeb1e3507b8461e240e3b8d18c1e7bd2f1122b11fc9ec40a65894031a
 //34- 20ab747d45a77938a5b84c2944b8f5355c49f21db0c549451c6281c91ba48d0d
+//5 - ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d
 
 //1234- cd53a2ce68e6476c29512ea53c395c7f5d8fbcb4614d89298db14e2a5bdb5456
+//5 - ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d
+
+//12345- 80285644ea6e999deb6a60f1b4d16d03d611f46ffc1c390a929463cbe1c33c5c
