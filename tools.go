@@ -11,39 +11,14 @@ func createHash(value []byte) []byte {
 	return h.Sum(nil)
 }
 
-func CreateHashTreeArrayFromArray(input []string, arrayLength int) []merkleTreeNode {
+func CreateHashTreeArrayFromArray(inputs []string) []merkleTreeNode {
 	var nodes []merkleTreeNode
 
-	for i := 0; i < arrayLength; i = i + 2 {
-		var hash []byte
-		var value string
-
-		var hashLeft []byte
-		var hashRight []byte
-		if i+1 < arrayLength {
-			hashLeft = createHash([]byte(input[i]))
-			hashRight = createHash([]byte(input[i+1]))
-			hash = createHash(append(hashLeft, hashRight...))
-			value = input[i] + input[i+1]
-		} else {
-			hashLeft = createHash([]byte(input[i]))
-			hashRight = nil
-			hash = createHash(hashLeft)
-			value = input[i]
-		}
+	for _, input := range inputs {
 		node := merkleTreeNode{
-			hash:  hash,
-			value: value,
-			left: &merkleTreeNode{
-				left:  nil,
-				right: nil,
-				hash:  hashLeft,
-			},
-			right: &merkleTreeNode{
-				left:  nil,
-				right: nil,
-				hash:  hashRight,
-			},
+			hash:  createHash([]byte(input)),
+			left:  nil,
+			right: nil,
 		}
 		nodes = append(nodes, node)
 	}

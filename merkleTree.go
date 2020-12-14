@@ -15,9 +15,8 @@ type MerkleTree struct {
 }
 
 func (m *MerkleTree) InitFromArray(input []string) {
-	hashTreeArray := CreateHashTreeArrayFromArray(input, len(input))
-	m.root, m.height = CreateMerkleTreeFromHashTreeArray(hashTreeArray, 2)
-
+	hashTreeArray := CreateHashTreeArrayFromArray(input)
+	m.root, m.height = CreateMerkleTreeFromHashTreeArray(hashTreeArray, 1)
 }
 
 func (m *MerkleTree) Root() *merkleTreeNode {
@@ -29,21 +28,26 @@ func (m *MerkleTree) Height() int {
 }
 
 func (m *MerkleTree) DisplayLevel(level int) {
-	arr := Level(m.root, [][]byte{}, level, 1)
+	arr := m.Level(level)
 
 	for _, val := range arr {
 		fmt.Printf("%x\n", val)
 	}
 }
-func Level(node *merkleTreeNode, array [][]byte, level int, indexLevel int) [][]byte {
+
+func getLevel(node *merkleTreeNode, array [][]byte, level int, indexLevel int) [][]byte {
 	if indexLevel == level {
 		return append(array, node.hash)
 	}
 	if node.left != nil {
-		array = Level(node.left, array, level, indexLevel+1)
+		array = getLevel(node.left, array, level, indexLevel+1)
 	}
 	if node.right != nil {
-		array = Level(node.right, array, level, indexLevel+1)
+		array = getLevel(node.right, array, level, indexLevel+1)
 	}
 	return array
+}
+
+func (m *MerkleTree) Level(level int) [][]byte {
+	return getLevel(m.root, [][]byte{}, level, 1)
 }
