@@ -69,8 +69,7 @@ In a realtime DB (NoSQL) like RethinkDb:
   }
 }
 ```
-
-The field "cards" allows us to modify teams score efficiently. If a player stats needs to be update and therefore changing the score of its team. Instead of having to go through all teams to see which team has it, we can keep the track of all the cards used and by which player. Allowing us to update the data more efficiently.
+> The field "cards" in the league table allows us to modify teams score efficiently. If a player stats needs to be update and therefore changing the score of its team. Instead of having to go through all teams to see which team has it, we can keep the track of all the cards used and by which player. Allowing us to update the data more efficiently.
 
 2. What is your strategy to update rankings in real time?
 Our backend is connected to our frontend via Websocket. We have a function listening to changes in our db making it "realtime". When "things" happens and the db get updated (let say Zidane is playing and got a score of 100 during the weekend) then our backend will properly send this info to all our users through websocket. Update will be "live" on the frontend.
